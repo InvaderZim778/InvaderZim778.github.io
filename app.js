@@ -33,6 +33,20 @@ const data = [
   const restartButton = document.getElementById("restart-button");
   const finalScoreElement = document.getElementById("final-score");
   
+    // Spiele Audio ab
+    function playAudio(audioFile) {
+    const audio = new Audio(audioFile);
+    audio.play();
+  }
+
+  // Hover-Sound abspielen
+const hoverSoundFruit = new Audio("audio/hover-fruit.mp3");
+const hoverSoundVegetable = new Audio("audio/hover-vegetable.mp3");
+
+fruitButton.addEventListener("mouseover", () => hoverSoundFruit.play());
+vegetableButton.addEventListener("mouseover", () => hoverSoundVegetable.play());
+
+
   // Lade das aktuelle Item
   function loadItem() {
     const item = data[currentItem];
