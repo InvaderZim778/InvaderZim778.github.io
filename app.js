@@ -3,7 +3,7 @@ const data = [
       name: "Apfel",
       type: "Obst",
       fact: "Äpfel sind reich an Ballaststoffen und Vitamin C.",
-      image: "apple.jpg",
+      image: "img/apple.jpg",
       audioFact: "apple-fact.mp3"
     },
     {
