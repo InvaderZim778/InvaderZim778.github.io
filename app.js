@@ -10,7 +10,7 @@ const data = [
       name: "Karotte",
       type: "Gemüse",
       fact: "Karotten sind eine hervorragende Quelle für Beta-Carotin.",
-      image: "carrot.jpg",
+      image: "img/carrot.jpg",
       audioFact: "carrot-fact.mp3"
     },
     // Weitere Früchte und Gemüse hinzufügen...
