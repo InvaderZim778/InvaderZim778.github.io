@@ -261,25 +261,37 @@
   const restartButton = document.getElementById("restart-button");
   const finalScoreElement = document.getElementById("final-score");
   
-    // Spiele Audio ab
-    function playAudio(audioFile) {
-    const audio = new Audio(audioFile);
-    audio.play();
-  }
-  // Warte, bis das Audio zu Ende ist, bevor die nächste Frage geladen wird
-  function playAudioWithDelay(audioFile, callback) {
-    const audio = new Audio(audioFile);
-    audio.play();
-    audio.onended = callback; 
-  }
+  let isPlaying = false; // Variable für den Soundstatus
 
-  // Hover-Sound abspielen
-const hoverSoundFruit = new Audio("audio/hover-fruit.mp3");
-const hoverSoundVegetable = new Audio("audio/hover-vegetable.mp3");
+    const hoverSoundFruit = new Audio("audio/hover-fruit.mp3"); // Hover-Sound für Obst
+    const hoverSoundVegetable = new Audio("audio/hover-vegetable.mp3"); // Hover-Sound für Gemüse
+
+    // Funktion, um den Hover-Sound abzuspielen, wenn kein anderer Sound läuft
+    function playHoverSound(audiofile, callback) {
+    if (!isPlaying) { // Nur abspielen, wenn kein anderer Sound läuft
+          // Buttons deaktivieren
+        fruitButton.disabled = true;
+        vegetableButton.disabled = true;
+        isPlaying = true;
+        const audio = new Audio(audiofile);
+        audio.play();
+        audio.onended = () => { // Wenn der Sound zu Ende ist, setze isPlaying zurück
+        fruitButton.disabled = false;
+        vegetableButton.disabled = false;
+        isPlaying = false;
+        if (callback) callback();
+        };
+    }
+    }
+
+// Event-Listener für Obst-Hover
+fruitButton.addEventListener("mouseover", () => playHoverSound("audio/hover-fruit.mp3"));
+
+// Event-Listener für Gemüse-Hover
+vegetableButton.addEventListener("mouseover", () => playHoverSound("audio/hover-vegetable.mp3"));
+
 const falsch = new Audio("audio/Falsch.mp3");
 
-fruitButton.addEventListener("mouseover", () => hoverSoundFruit.play());
-vegetableButton.addEventListener("mouseover", () => hoverSoundVegetable.play());
 
 
   // Lade das aktuelle Item
@@ -321,7 +333,7 @@ vegetableButton.addEventListener("mouseover", () => hoverSoundVegetable.play());
       score++;
       feedbackElement.textContent = "Richtig! " + item.fact;
        // Spiele den Audio-Fakt ab und warte, bis das Audio fertig ist
-    playAudioWithDelay(item.audioFact, () => {
+    playHoverSound(item.audioFact, () => {
         currentItem++;
         if (currentItem < data.length) {
           loadItem(); // Lade die nächste Frage
