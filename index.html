@@ -6,42 +6,71 @@
   <title>Obst oder Gemüse?</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Comic Sans MS', sans-serif;
       text-align: center;
-      background-color: #f3f3f3;
+      background: linear-gradient(to bottom, #a8e063, #56ab2f);
+      color: #fff;
+      margin: 0;
+      padding: 0;
     }
     #game-container {
-      margin-top: 50px;
+      margin: 50px auto;
+      width: 90%;
+      max-width: 600px;
+      padding: 20px;
+      border-radius: 15px;
+      background: #fff;
+      color: #333;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    h1 {
+      font-size: 2.5em;
+      color: #fff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     }
     img {
-      max-width: 300px;
+      max-width: 100%;
       margin: 20px 0;
+      border: 5px solid #4caf50;
+      border-radius: 15px;
     }
     button {
-      font-size: 20px;
+      font-size: 1.2em;
       padding: 15px 30px;
       margin: 10px;
       cursor: pointer;
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
+      transition: transform 0.3s ease, background-color 0.3s ease;
     }
     .correct {
-      background-color: #4CAF50;
+      background-color: #4caf50;
       color: white;
     }
     .wrong {
       background-color: #f44336;
       color: white;
     }
+    button:hover {
+      transform: scale(1.1);
+      background-color: #ffd700;
+      color: #333;
+    }
+    #feedback {
+      font-size: 1.5em;
+      margin: 15px 0;
+      padding: 10px;
+      border-radius: 5px;
+    }
   </style>
 </head>
 <body>
-  <h1>Obst oder Gemüse?</h1>
+  <h1>🍎 Obst oder Gemüse? 🥕</h1>
   <div id="game-container">
     <img id="fruit-image" src="apple.jpg" alt="Frucht">
     <div>
-      <button id="fruit-button">Obst</button>
-      <button id="vegetable-button">Gemüse</button>
+      <button class="correct" id="fruit-button">Obst</button>
+      <button class="wrong" id="vegetable-button">Gemüse</button>
     </div>
     <p id="feedback"></p>
   </div>
