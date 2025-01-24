@@ -26,7 +26,7 @@ const data = [
       {
         name: "Paprika",
         type: "Gemüse",
-        fact: "Karotten sind eine hervorragende Quelle für Beta-Carotin.",
+        fact: "Paprika ist super gesund! Sie hat mehr Vitamin C als eine Orange und hilft dir, dein Immunsystem zu stärken – besonders die rote Paprika!",
         image: "images/paprika.jpg",
         source: 'Bild von <a href="https://safesearch.pixabay.com/de/users/nikiko-268709/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=421087">Nicole Köhler</a> auf <a href="https://safesearch.pixabay.com/de//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=421087">Pixabay</a>',
         audioFact: "audio/paprika-fact.mp3"
