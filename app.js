@@ -8,7 +8,7 @@ const data = [
       audioFact: "audio/apple-fact.mp3"
     },
     {
-      name: "Karotte",
+      name: "Karotte", 
       type: "Gemüse",
       fact: "Karotten sind eine hervorragende Quelle für Beta-Carotin.",
       image: "images/carrot.jpg",
