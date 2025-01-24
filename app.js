@@ -4,7 +4,7 @@ const data = [
       type: "Obst",
       fact: "Äpfel sind reich an Ballaststoffen und Vitamin C.",
       image: "images/apple.jpg",
-      source: "Bild von Unsplash: Fotograf Max Muster",
+      source: "Bild von <a href="https://safesearch.pixabay.com/de/users/pexels-2286921/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1834639">Pexels</a> auf <a href="https://safesearch.pixabay.com/de//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1834639">Pixabay</a>",
       audioFact: "audio/apple-fact.mp3"
     },
     {
@@ -12,7 +12,7 @@ const data = [
       type: "Gemüse",
       fact: "Karotten sind eine hervorragende Quelle für Beta-Carotin.",
       image: "images/carrot.jpg",
-      source: "Bild von Pixabay: Benutzer KarottenFan",
+      source: "Bild von <a href="https://safesearch.pixabay.com/de/users/maxmann-665103/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2309814">Th G</a> auf <a href="https://safesearch.pixabay.com/de//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2309814">Pixabay</a>",
       audioFact: "audio/carrot-fact.mp3"
     }
   ];
