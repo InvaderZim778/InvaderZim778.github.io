@@ -13,7 +13,8 @@
       margin: 0;
       padding: 0;
     }
-    #game-container {
+    #game-container, #start-container, #end-container {
+      display: none;
       margin: 50px auto;
       width: 90%;
       max-width: 600px;
@@ -23,7 +24,10 @@
       color: #333;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
-    h1 {
+    #start-container.active, #game-container.active, #end-container.active {
+      display: block;
+    }
+    h1, h2 {
       font-size: 2.5em;
       color: #fff;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -73,6 +77,15 @@
 </head>
 <body>
   <h1>🍎 Obst oder Gemüse? 🥕</h1>
+
+  <!-- Start Container -->
+  <div id="start-container" class="active">
+    <h2>Willkommen!</h2>
+    <p>Kannst du entscheiden, ob es Obst oder Gemüse ist? Starte jetzt!</p>
+    <button id="start-button">Spiel starten</button>
+  </div>
+
+  <!-- Game Container -->
   <div id="game-container">
     <img id="fruit-image" src="images/apple.jpg" alt="Frucht">
     <div class="source" id="image-source">Quelle: </div>
@@ -82,6 +95,14 @@
     </div>
     <p id="feedback"></p>
   </div>
+
+  <!-- End Container -->
+  <div id="end-container">
+    <h2>Spiel beendet!</h2>
+    <p id="final-score"></p>
+    <button id="restart-button">Erneut spielen</button>
+  </div>
+
   <script src="app.js"></script>
 </body>
 </html>

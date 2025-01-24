@@ -18,51 +18,75 @@ const data = [
   ];
   
   let currentItem = 0;
+  let score = 0;
+  
+  const startContainer = document.getElementById("start-container");
+  const gameContainer = document.getElementById("game-container");
+  const endContainer = document.getElementById("end-container");
   
   const imageElement = document.getElementById("fruit-image");
-  const feedbackElement = document.getElementById("feedback");
   const sourceElement = document.getElementById("image-source");
+  const feedbackElement = document.getElementById("feedback");
   const fruitButton = document.getElementById("fruit-button");
   const vegetableButton = document.getElementById("vegetable-button");
+  const startButton = document.getElementById("start-button");
+  const restartButton = document.getElementById("restart-button");
+  const finalScoreElement = document.getElementById("final-score");
   
   // Lade das aktuelle Item
   function loadItem() {
     const item = data[currentItem];
     imageElement.src = item.image;
-    sourceElement.textContent = `Quelle: ${item.source}`;
+    sourceElement.innerHTML = `Quelle: ${item.source}`;
     feedbackElement.textContent = "";
   }
   
-  // Spiele Audio ab
-  function playAudio(audioFile) {
-    const audio = new Audio(audioFile);
-    audio.play();
+  // Zeige einen Container an
+  function showContainer(container) {
+    startContainer.classList.remove("active");
+    gameContainer.classList.remove("active");
+    endContainer.classList.remove("active");
+    container.classList.add("active");
+  }
+  
+  // Starte das Spiel
+  startButton.addEventListener("click", () => {
+    score = 0;
+    currentItem = 0;
+    showContainer(gameContainer);
+    loadItem();
+  });
+  
+  // Beende das Spiel
+  function endGame() {
+    finalScoreElement.textContent = `Du hast ${score} richtige Antworten gegeben!`;
+    showContainer(endContainer);
   }
   
   // Überprüfe die Antwort
   function checkAnswer(answer) {
     const item = data[currentItem];
     if (answer === item.type) {
+      score++;
       feedbackElement.textContent = "Richtig! " + item.fact;
-      playAudio(item.audioFact); // Spiele den Audio-Fact ab
-      currentItem = (currentItem + 1) % data.length;
-      setTimeout(loadItem, 3000); // Lade nach 3 Sekunden die nächste Frage
+      currentItem++;
+      if (currentItem < data.length) {
+        setTimeout(loadItem, 2000); // Lade nach 2 Sekunden die nächste Frage
+      } else {
+        setTimeout(endGame, 2000); // Beende das Spiel, wenn alle Fragen beantwortet wurden
+      }
     } else {
-      feedbackElement.textContent = "Falsch! Versuch es nochmal.";
+      feedbackElement.textContent = "Falsch! Das Spiel ist vorbei.";
+      setTimeout(endGame, 2000);
     }
   }
-  
-  // Hover-Sound abspielen
-  const hoverSoundFruit = new Audio("audio/hover-fruit.mp3");
-  const hoverSoundVegetable = new Audio("audio/hover-vegetable.mp3");
-  
-  fruitButton.addEventListener("mouseover", () => hoverSoundFruit.play());
-  vegetableButton.addEventListener("mouseover", () => hoverSoundVegetable.play());
   
   // Antwort prüfen
   fruitButton.addEventListener("click", () => checkAnswer("Obst"));
   vegetableButton.addEventListener("click", () => checkAnswer("Gemüse"));
   
-  // Lade das erste Item
-  loadItem();
+  // Spiel neu starten
+  restartButton.addEventListener("click", () => {
+    showContainer(startContainer);
+  });
   
