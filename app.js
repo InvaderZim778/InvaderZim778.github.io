@@ -329,33 +329,58 @@ const falsch = new Audio("audio/Falsch.mp3");
   // Überprüfe die Antwort
   function checkAnswer(answer) {
     const item = data[currentItem];
-    if (answer === item.type) {
-      score++;
+    const correctAnswer = item.type;
+  
+    if (answer === correctAnswer) {
+      // Richtig: Zeige den Fakt und lade den nächsten
       feedbackElement.textContent = "Richtig! " + item.fact;
-       // Spiele den Audio-Fakt ab und warte, bis das Audio fertig ist
-    playHoverSound(item.audioFact, () => {
+      playSoundWithButtonControl(new Audio(item.audioFact), () => {
         currentItem++;
         if (currentItem < data.length) {
-          loadItem(); // Lade die nächste Frage
+          loadItem(); // Nächste Frage laden
         } else {
-          endGame(); // Beende das Spiel, wenn alle Fragen beantwortet wurden
+          endGame(); // Spiel beenden
         }
       });
-      /*
-      const itemfact = new Audio(item.audioFact);
-      itemfact.play();
-      currentItem++;
-      if (currentItem < data.length) {
-        setTimeout(loadItem, 2000); // Lade nach 2 Sekunden die nächste Frage
-      } else {
-        setTimeout(endGame, 2000); // Beende das Spiel, wenn alle Fragen beantwortet wurden
-      }*/
     } else {
-      feedbackElement.textContent = "Falsch! Das Spiel ist vorbei.";
-      falsch.play();
-      setTimeout(endGame, 3000);
+      // Falsch: Zeige den richtigen Typ
+      feedbackElement.textContent = "Falsch! Das war " + correctAnswer + ".";
+      showCorrectAnswer(correctAnswer);
+      playSoundWithButtonControl(new Audio("audio/wrong.mp3"), endGame);
     }
   }
+  
+  // Funktion, um die richtige Antwort mit Hintergrundfarbe zu zeigen
+  function showCorrectAnswer(correctAnswer) {
+    // Wähle die richtige Button-Farbe
+    const correctColor = correctAnswer === "Obst" 
+      ? getComputedStyle(fruitButton).backgroundColor 
+      : getComputedStyle(vegetableButton).backgroundColor;
+  
+    // Ersetze das Bild durch ein farbiges Div
+    imageElement.style.display = "none"; // Verstecke das Bild
+    const colorBox = document.createElement("div");
+    colorBox.style.width = "100%";
+    colorBox.style.height = "300px";
+    colorBox.style.backgroundColor = correctColor;
+    colorBox.style.borderRadius = "15px"; // Optional: Abgerundete Ecken
+    colorBox.style.display = "flex";
+    colorBox.style.justifyContent = "center";
+    colorBox.style.alignItems = "center";
+    colorBox.style.color = "white";
+    colorBox.style.fontSize = "2em";
+    colorBox.textContent = correctAnswer; // Zeige "Obst" oder "Gemüse"
+  
+    // Füge das farbige Feld ein
+    imageElement.parentNode.replaceChild(colorBox, imageElement);
+  
+    // Nach kurzer Zeit das Spiel beenden
+    setTimeout(() => {
+      colorBox.parentNode.replaceChild(imageElement, colorBox); // Farbfeld zurücksetzen
+      imageElement.style.display = "block"; // Bild wieder anzeigen
+    }, 2000); // Zeit bis zur Rückkehr
+  }
+  
   
   // Antwort prüfen
   fruitButton.addEventListener("click", () => checkAnswer("Obst"));
